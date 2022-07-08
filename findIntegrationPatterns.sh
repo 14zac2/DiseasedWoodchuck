@@ -10,7 +10,7 @@ sort | uniq > integrated_genes.tsv
 # Add sample ID and tissue type
 sampleID="L9647_TLH"
 tissue="Infected"
-awk -F'\t' 'BEGIN {OFS = FS} {print $sampleID, $0, $tissue}' integrated_genes.tsv | 
+awk -v tissue="$tissue" -v sampleID="$sampleID" -F'\t' 'BEGIN {OFS = FS} {print sampleID, $0, tissue}' integrated_genes.tsv | 
 sponge > integrated_genes.tsv
 
 # Collect more extensive information: woodchuck genes involved, woodchuck chromosome, 
@@ -24,5 +24,5 @@ sed 's/\tCDS\t/\t/g' > int_genes_chroms.tsv
 # Add sample ID and tissue type
 sampleID="L9647_TLH"
 tissue="Infected"
-awk -F'\t' 'BEGIN {OFS = FS} {print $sampleID, $0, $tissue}' int_genes_chroms.tsv | 
+awk -v tissue="$tissue" -v sampleID="$sampleID" -F'\t' 'BEGIN {OFS = FS} {print sampleID, $0, tissue}' int_genes_chroms.tsv | 
 sponge > int_genes_chroms.tsv
