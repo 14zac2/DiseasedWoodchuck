@@ -21,3 +21,8 @@ awk -v col=8 -F '\t' '{$col=gsub(",", "", $col)+1; print}' |
 sed 's/WhBvgp //g' | sed 's/\. //g' | sed 's/NC_004107[^ ]* //g' | 
 sed 's/:[0-9]* / /g' | sed 's/([^()]*)//g' | sed 's/ /\t/g' | 
 sed 's/\tCDS\t/\t/g' > int_genes_chroms.tsv
+# Add sample ID and tissue type
+sampleID="L9647_TLH"
+tissue="Infected"
+awk -F'\t' 'BEGIN {OFS = FS} {print $sampleID, $0, $tissue}' int_genes_chroms.tsv | 
+sponge > int_genes_chroms.tsv
