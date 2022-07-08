@@ -1,4 +1,5 @@
-# Analysis of woodchucks infected with the Woodchuck Hepatitis Virus (WHV)
+# WHV Analysis
+### Analysis of woodchucks infected with the Woodchuck Hepatitis Virus (WHV)
 
 ## File list
 
