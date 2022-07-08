@@ -1,4 +1,5 @@
 # Pulling out important information from fusions.tsv to compare across samples
+# Note that it uses the output WHV_WCK_fusions.tsv created in intSite_cellAssociation_scRNAseq.sh
 
 # Grab a unique list of genes that integrations occur in
 # Note that when an integration is intergenic, this code gets rid of the specific base coordinates but treats the
