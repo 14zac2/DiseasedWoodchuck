@@ -6,7 +6,12 @@
 cut -f1,2 WHV_WCK_fusions.tsv | sed 's/WhBvgp//g' | 
 sed 's/\.//g' | sed 's/\t//g' | sed '/^$/d' | 
 sed 's/([^()]*)//g' | tr -d ' ' | 
-sort | uniq > integrated_genes.txt
+sort | uniq > integrated_genes.tsv
+# Add sample ID and tissue type
+sampleID="L9647_TLH"
+tissue="Infected"
+awk -F'\t' 'BEGIN {OFS = FS} {print $sampleID, $0, $tissue}' integrated_genes.tsv | 
+sponge > integrated_genes.tsv
 
 # Collect more extensive information: woodchuck genes involved, woodchuck chromosome, 
 # gene structure at integration, integration confidence determined by Arriba, number of supporting reads
