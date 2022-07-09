@@ -1,5 +1,9 @@
 # Pulling out important information from fusions.tsv to compare across samples
 # Note that it uses the output WHV_WCK_fusions.tsv created in intSite_cellAssociation_scRNAseq.sh
+# But here is the prep code for convenience
+grep "NC_004107" fusions.tsv | grep "WCK01" > WHV_WCK_fusions.tsv
+head -n 1 fusions.tsv > header.tsv
+cat header.tsv WHV_WCK_fusions.tsv > filtered_fusions.tsv
 
 # Grab a unique list of genes that integrations occur in
 # Note that when an integration is intergenic, this code gets rid of the specific base coordinates but treats the
