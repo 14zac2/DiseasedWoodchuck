@@ -14,13 +14,13 @@ tissue="Infected"
 awk -v tissue="$tissue" -v sampleID="$sampleID" -F'\t' 'BEGIN {OFS = FS} {print sampleID, $0, tissue}' integrated_genes.tsv | 
 sponge integrated_genes.tsv
 
-# Collect more extensive information: woodchuck genes involved, woodchuck chromosome, 
+# Collect more extensive information: woodchuck genes involved (with coordinate), woodchuck chromosome, 
 # gene structure at integration, integration confidence determined by Arriba, number of supporting reads
 # Keeps different integration sites with different coordinates separate from each other
 cut -f1,2,5,6,7,8,15,30 WHV_WCK_fusions.tsv | 
 awk -v col=8 -F '\t' '{$col=gsub(",", "", $col)+1; print}' | 
 sed 's/WhBvgp //g' | sed 's/\. //g' | sed 's/NC_004107[^ ]* //g' | 
-sed 's/:[0-9]* / /g' | sed 's/([^()]*)//g' | sed 's/ /\t/g' | 
+sed 's/:[0-9]* / /g' | sed 's/ /\t/g' | 
 sed 's/\tCDS\t/\t/g' > int_genes_chroms.tsv
 # Add sample ID and tissue type
 sampleID="L9647_TLH"
