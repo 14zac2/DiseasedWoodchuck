@@ -61,7 +61,7 @@ sed -i 's/barcodes/clusters/' fusion_clusters.tsv
 # Make sure to delete old labeled_unique_integrations.txt 
 rm labeled_unique_integrations.txt
 cut -f30 WHV_WCK_fusions.tsv > fusion_reads.tsv
-n=-1
+n=0
 oldP=0
 # Loop through fusion reads
 while read p; do
@@ -81,7 +81,7 @@ while read p; do
 done < fusion_reads.tsv
 
 # Added header to new file
-sed -i 's/Int_0/intSite/g' labeled_unique_integrations.txt
+sed -i '1s/^/intSite\n/g' labeled_unique_integrations.txt
 
 # Add columns to filtered_fusions.tsv
 paste -d "\t" labeled_unique_integrations.txt filtered_fusions.tsv fusion_barcodes.tsv fusion_clusters.tsv > filtered_fusions_new.tsv
