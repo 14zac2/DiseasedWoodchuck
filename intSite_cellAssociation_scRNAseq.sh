@@ -114,6 +114,8 @@ do
     echo "Replacing $intSite with $genes" ;
     sed -i "s/\b${intSite}\b/$genes/g" impacted_genes_per_cell.txt
 done < filtered_fusions_new.tsv
+# Remove WhBvgp
+sed -e 's/WhBvgp//g' -e 's/,$//g' -e 's/,,/,/g' -i impacted_genes_per_cell.txt
 
 # Append this to per cell info
 paste -d "\t" integration_sites_appended_to_cells.tsv impacted_genes_per_cell.txt > int_sites_plus_impacted_genes_per_cell.tsv
