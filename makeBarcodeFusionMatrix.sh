@@ -3,8 +3,8 @@
 # Making a matrix of barcodes by fusion expression
 
 # Use output from intSite_cellAssociation_scRNAseq.sh
-# First extract barcodes and associated genes from filtered_fusions_new.tsv
-cut -f2,3,32 filtered_fusions_new.tsv > all_fusion_barcodes.tsv
+# First extract barcodes and associated genes from filtered_fusions_withBarcodes.tsv
+cut -f1,2,31 filtered_fusions_withBarcodes.tsv > all_fusion_barcodes.tsv
 # Combine both gene columns
 awk '{print $1 "," $2 "\t" $3}' all_fusion_barcodes.tsv | sponge all_fusion_barcodes.tsv
 # Remove super long parts of gene names
