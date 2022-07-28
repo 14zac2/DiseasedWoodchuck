@@ -43,6 +43,9 @@ done < R1_fusions_cellBarcode.tsv
 # Add "barcodes" header to this file
 sed -i '1s/^/barcodes\n/g' fusion_barcodes.tsv
 
+# Add this to filtered_fusions.tsv
+paste -d "\t" filtered_fusions.tsv fusion_barcodes.tsv > filtered_fusions_withBarcodes.tsv
+
 # Using R, make a TSV file of cluster numbers and cell IDs
 # This file is called cluster_barcode_IDs.tsv
 
