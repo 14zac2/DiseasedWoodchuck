@@ -2,6 +2,10 @@
 
 ### The following code extracts reads from Arriba output "fusions.tsv" and determines which cell they are associated with
 
+# Set sample variables
+woodchuck="L9647"
+tissue="TLH"
+
 # Extract desired reads
 echo "Extracting reads"
 grep "NC_004107" fusions.tsv | grep "WCK01" > WHV_WCK_fusions.tsv
@@ -16,7 +20,7 @@ cut -f30 filtered_fusions.tsv | tr , "\n" | tail -n +2 | sort | uniq > fusion_re
 echo "Identifying cells with viral integration events"
 seqkit grep \
 --pattern-file fusion_reads.txt \
-/data/zoe_fastqs/L9647/TLH/*R1* \
+/data/zoe_fastqs/"$woodchuck"/"$tissue"/*R1* \
 > R1_fusions.fastq
 
 # Convert barcode fastq file to fasta, then remove fastq files
