@@ -50,16 +50,21 @@ sed -i '1s/^/barcodes\n/g' fusion_barcodes.tsv
 
 # Add this to filtered_fusions.tsv
 paste -d "\t" filtered_fusions.tsv fusion_barcodes.tsv > filtered_fusions_withBarcodes.tsv
-# First extract barcodes and associated genes from filtered_fusions_withBarcodes.tsv
+
+# Extract barcodes and associated genes from filtered_fusions_withBarcodes.tsv
 cut -f1,2,31 filtered_fusions_withBarcodes.tsv > all_fusion_barcodes.tsv
 # Combine both gene columns
 awk '{print $1 "," $2 "\t" $3}' all_fusion_barcodes.tsv | sponge all_fusion_barcodes.tsv
+
 # Remove super long parts of gene names
 sed -i 's/mikado\.WCK01_AAH20201022_F8-//g' all_fusion_barcodes.tsv
 # Remove WhBvgp
 sed -e 's/WhBvgp//g' -e 's/,\t/\t/g' -e 's/^,//g' -e 's/,,/,/g' -i all_fusion_barcodes.tsv
 # Remove lines that contain periods (as these are empty gene names at this point)
 grep -v "\." all_fusion_barcodes.tsv | sponge all_fusion_barcodes.tsv
+# Remove brackets and anything within them, removing whitespace
+sed -e 's/([^()]*)//g' all_fusion_barcodes.tsv | tr -d ' ' | sponge all_fusion_barcodes.tsv
+
 # Expand the comma separated barcodes, while repeated gene fusion information
 sed -Ee 's/^((\S+\t)[^,]+),/\1\n\2/;P;D' -i all_fusion_barcodes.tsv
 # Remove header
