@@ -7,6 +7,6 @@ run_arriba_starsolo_scRNAseq_piped.sh - Run STARSolo and Arriba on scRNA-seq FAS
 
 intSite_cellAssociation_scRNAseq.sh - Associate specific clusters with integration sites found with Arriba. Uses input from makeBarcodeFusionMatrix.sh and a TSV file of cell barcodes and their associated cluster from processed scRNA-seq data (`cluster_barcode_IDs.tsv`) generated in R.
 
-findIntegrationPatterns.sh - Pulling out important information from fusions.tsv to compare across samples.
+findIntegrationPatterns.sh - Pulling out important information from Arriba output `fusions.tsv` to compare across samples.
 
 makeBarcodeFusionMatrix.sh - Make a matrix of the number of fusion events for each cell based on Arriba output. Requires Arriba output `fusions.tsv` and R1 barcodes FASTQ files from CellRanger (`/file/path/to/fastqs/*R1*`).
