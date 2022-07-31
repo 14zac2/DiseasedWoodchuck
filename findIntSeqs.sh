@@ -18,11 +18,17 @@ sort -n integration_coords.tsv | uniq | sponge integration_coords.tsv
 awk NF integration_coords.tsv | sponge integration_coords.tsv
 
 # STOP HERE. Collect from all samples, then do the rest.
+# Concatenate integration coordinates
+# All samples begin with L (L*/*/arriba* representing the file path where integration_coords.csv files are stored)
+# Place in motif_analysis folder
+cat L*/*/arriba*/integration_coords.tsv > ./motif_analysis/integration_coords_allSamples.tsv
+# Sort and uniq this file to only keep unique coordinates
+sort integration_coords_allSamples.tsv | uniq | sponge integration_coords_allSamples.tsv
 
 # Create temp file used to find flank sites
 echo "Creating temporary flank site file"
 # Replace colon of coordinate with tab
-sed -e 's/:/\t/g' integration_coords.tsv > flank_coords.tmp
+sed -e 's/:/\t/g' integration_coords_allSamples.tsv > flank_coords.tmp
 # Duplicate coordinate column
 awk 'BEGIN { FS="\t"; OFS="\t" } { $2=$2 "\t" $2 } 1' flank_coords.tmp | sponge flank_coords.tmp
 # Replace any spaces with tabs
