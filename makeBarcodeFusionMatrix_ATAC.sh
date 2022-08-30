@@ -46,7 +46,7 @@ while IFS=$'\t' read -r header barcode
 do
     echo "Replacing" $header "with" ${barcode}-1
     sed -i "s/$header/${barcode}-1/g" fusion_barcodes.tsv
-done < R1_fusions_cellBarcode.tsv
+done < R2_fusions_cellBarcode.tsv
 # Add "barcodes" header to this file
 sed -i '1s/^/barcodes\n/g' fusion_barcodes.tsv
 
