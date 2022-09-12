@@ -42,6 +42,8 @@ awk -v s=10 'BEGIN { FS="\t"; OFS="\t" } {print $1, $2-s, $3+s}' flank_coords.tm
 awk -v s=50 'BEGIN { FS="\t"; OFS="\t" } {print $1, $2-s, $3+s}' flank_coords.tmp > flank_coords_50bp.bed
 # Create 100bp flank site bed file
 awk -v s=100 'BEGIN { FS="\t"; OFS="\t" } {print $1, $2-s, $3+s}' flank_coords.tmp > flank_coords_100bp.bed
+# Create 1000bp flank site bed file
+awk -v s=1000 'BEGIN { FS="\t"; OFS="\t" } {print $1, $2-s, $3+s}' flank_coords.tmp > flank_coords_1000bp.bed
 
 # Get fasta sequences from files
 bedtools getfasta -fi ~/Dropbox/Zoe/scf_version/genome/sc2_ortho_mito_virus.fa \
@@ -50,3 +52,5 @@ bedtools getfasta -fi ~/Dropbox/Zoe/scf_version/genome/sc2_ortho_mito_virus.fa \
 -bed flank_coords_50bp.bed -fo flank_seq_50bp.fasta
 bedtools getfasta -fi ~/Dropbox/Zoe/scf_version/genome/sc2_ortho_mito_virus.fa \
 -bed flank_coords_100bp.bed -fo flank_seq_100bp.fasta
+bedtools getfasta -fi ~/Dropbox/Zoe/scf_version/genome/sc2_ortho_mito_virus.fa \
+-bed flank_coords_1000bp.bed -fo flank_seq_1000bp.fasta
