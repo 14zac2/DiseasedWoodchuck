@@ -47,6 +47,10 @@ awk -v s=500 'BEGIN { FS="\t"; OFS="\t" } {print $1, $2-s, $3+s}' flank_coords.t
 # Create 1000bp flank site bed file
 awk -v s=1000 'BEGIN { FS="\t"; OFS="\t" } {print $1, $2-s, $3+s}' flank_coords.tmp > flank_coords_1000bp.bed
 
+# Replace negative values with zero if necessary
+sed -i 's/-[0-9][0-9]*/0/' flank_coords_500bp.bed
+sed -i 's/-[0-9][0-9]*/0/' flank_coords_1000bp.bed
+
 # Get fasta sequences from files
 bedtools getfasta -fi ~/Dropbox/Zoe/scf_version/genome/sc2_ortho_mito_virus.fa \
 -bed flank_coords_10bp.bed -fo flank_seq_10bp.fasta
